@@ -295,35 +295,4 @@ def main():
     poll_loop()
 
 if __name__ == "__main__":
-    main()atus_text}", get_main_keyboard())
-
-# ==========================================
-# التشغيل الرئيسي
-# ==========================================
-def poll_loop():
-    offset = None
-    print("Bot polling started", flush=True)
-    while True:
-        try:
-            params = {"timeout": 30}
-            if offset is not None:
-                params["offset"] = offset
-            res = tg_request("getUpdates", params)
-            if res.get("ok"):
-                for upd in res.get("result", []):
-                    offset = upd["update_id"] + 1
-                    handle_update(upd)
-            else:
-                time.sleep(3)
-        except Exception as exc:
-            print(f"Poll error: {exc}", file=sys.stderr, flush=True)
-            time.sleep(3)
-
-def main():
-    print(f"Starting server on port {PORT}", flush=True)
-    server_thread = threading.Thread(target=start_web_server, daemon=True)
-    server_thread.start()
-    poll_loop()
-
-if __name__ == "__main__":
     main()
