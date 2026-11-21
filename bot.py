@@ -295,4 +295,18 @@ def main():
     poll_loop()
 
 if __name__ == "__main__":
+    main()           handle_callback(upd["callback_query"])
+            else:
+                time.sleep(3)
+        except Exception as exc:
+            print(f"Poll error: {exc}", file=sys.stderr, flush=True)
+            time.sleep(3)
+
+def main():
+    print(f"Starting server on port {PORT}", flush=True)
+    thread = threading.Thread(target=start_web_server, daemon=True)
+    thread.start()
+    poll_loop()
+
+if __name__ == "__main__":
     main()
